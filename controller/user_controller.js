@@ -1,5 +1,5 @@
-const { User } = require('../models')
-const bcrypt = require('bcrypt')
+const { User } = require('../models');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 class UserController {
@@ -57,6 +57,6 @@ class UserController {
         }
       }
 
-}
+};
 
 module.exports = UserController

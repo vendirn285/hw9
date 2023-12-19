@@ -1,4 +1,7 @@
 const { Movie } = require('../models');
+const MovieRepository = require('../repositories/movie_repository');
+
+
 
 class MovieController {
     static async getAll(req, res, next) {
@@ -44,6 +47,24 @@ class MovieController {
         }
     }
 
+    static async uploadImage(req, res, next) {
+        try {
+            const { id } = req.params;
+
+            // Check if the movie exists
+            const movie = await Movie.findByPk(id);
+            if (!movie) throw { name: 'notFound' };
+
+            // Update the 'photo' field in the database with the filename of the uploaded image
+            movie.photo = req.file.filename;
+            await movie.save();
+
+            res.status(200).json({ message: 'Upload berhasil' });
+        } catch (err) {
+            next(err);
+        }
+    }
+
     static async delete(req, res, next) {
         try {
             const {id} = req.params;
@@ -53,6 +74,6 @@ class MovieController {
             next(error);
         }
     }
-}
+};
 
 module.exports = MovieController;

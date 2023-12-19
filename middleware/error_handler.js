@@ -3,6 +3,6 @@ const errorHandler = (err, req, res, next) => {
         res.status(404).json({message: 'Movie yang anda cari tidak ditemukan'})
     }
 
-}
+};
 
 module.exports = errorHandler;
